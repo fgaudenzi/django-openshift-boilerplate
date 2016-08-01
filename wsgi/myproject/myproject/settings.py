@@ -15,7 +15,7 @@ BASE_DIR = os.path.dirname(DJ_PROJECT_DIR)
 WSGI_DIR = os.path.dirname(BASE_DIR)
 REPO_DIR = os.path.dirname(WSGI_DIR)
 DATA_DIR = os.environ.get('OPENSHIFT_DATA_DIR', BASE_DIR)
-
+TEMPLATE_DIR= os.path.join(BASE_DIR, 'mainsite/templates')
 import sys
 sys.path.append(os.path.join(REPO_DIR, 'libs'))
 import secrets
@@ -28,10 +28,11 @@ SECRETS = secrets.getter(os.path.join(DATA_DIR, 'secrets.json'))
 SECRET_KEY = SECRETS['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG') == 'True'
-
+#DEBUG = os.environ.get('DEBUG') == 'True'
+DEBUG='False'
 from socket import gethostname
 ALLOWED_HOSTS = [
+    "localhost",
     gethostname(), # For internal OpenShift load balancer security purposes.
     os.environ.get('OPENSHIFT_APP_DNS'), # Dynamically map to the OpenShift gear name.
     #'example.com', # First DNS alias (set up in the app)
@@ -48,6 +49,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
+    'rest_framework',
+    'rest_framework.authtoken',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -60,13 +64,16 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+
+MESSAGE_STORAGE = 'django.contrib.messages.storage.cookie.CookieStorage'
+
 # GETTING-STARTED: change 'myproject' to your project name:
 ROOT_URLCONF = 'myproject.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,6 +85,12 @@ TEMPLATES = [
         },
     },
 ]
+
+
+
+
+
+
 
 WSGI_APPLICATION = 'myproject.wsgi.application'
 
@@ -110,5 +123,35 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+#STATIC_URL = '/static/'
+#STATIC_ROOT = os.path.join(WSGI_DIR, 'static_serve')
+##print "STATIC ROOT"+STATIC_ROOT
+#STATICFILES_DIRS = (
+#    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+#    # Always use forward slashes, even on Windows.
+#    # Don't forget to use absolute paths, not relative paths.
+#    os.path.join(WSGI_DIR, 'static'),
+#)
+##print "DIRS:"
+##print STATICFILES_DIRS
+#
+
+STATIC_ROOT=os.path.join(WSGI_DIR, "static_seve")
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(WSGI_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(WSGI_DIR, "static"),
+
+)
+
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
+}

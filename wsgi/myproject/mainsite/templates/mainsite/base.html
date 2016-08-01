@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+
+{% load bootstrap3 %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>django-openshift-boilerplate</title>
+    <meta name="description" content="">
+    <meta name="author" content="Filippo Gaudenzi">
+
+    <style type="text/css">
+        body {
+            padding-top: 60px;
+        }
+
+
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link href="{% static "font-awesome/css/font-awesome.min.css" %}"  rel="stylesheet" media="screen">
+    <link href="{% static "animate.css/animate.min.css" %}"  rel="stylesheet" media="screen">
+    <link href="{% static "css/mainsite.css" %}"  rel="stylesheet" media="screen">
+    <!--[if lt IE 9]>
+    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Django OS boilerplate</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+              <!-- views passes the value page which indicates the page type, indeed if page is euqal to index or about then the the li is activated -->
+            <li {% if page == "index" %} class="active" {% endif %}><a href="#">Home</a></li>
+            <li {% if page == "about" %} class="active" {% endif %}><a href="#about">About</a></li>
+            <li {% if page == "contact" %} class="active" {% endif %}><a href="#contact">Contact</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/register">Register</a></li>
+            <li ><a href="/login">Login <span class="sr-only">(current)</span></a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<div class="container">
+
+
+
+            {% block content %}
+            {% endblock %}
+
+
+
+</div> <!-- container -->
+    <script src="{% static "remarkable-bootstrap-notify/dist/bootstrap-notify.min.js" %}"></script>
+ <script>
+
+
+    {% if messages %}
+
+    {% for message in messages %}
+    $.notify({
+	// options
+	message: '{{ message }}'
+},{
+	// settings
+    {% if message.tags == 'success' %}
+	type: 'success'
+    {% endif %}
+    {% if message.tags == 'error' %}
+	type: 'danger'
+    {% endif %}
+    {% if message.tags == 'warning' %}
+	type: 'warning'
+    {% endif %}
+    {% if message.tags == 'info' %}
+	type: 'info'
+    {% endif %}
+});
+
+    {% endfor %}
+{% endif %}
+    </script>
+</body>
+</html>

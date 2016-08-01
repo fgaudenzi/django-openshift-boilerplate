@@ -5,3 +5,11 @@
 *~
 .project
 .pydevproject
+.idea
+env
+*.sqlite3
+wsgi/static_seve/
+wsgi/static_seve/*
+wsgi/static/
+wsgi/static/*
+!wsgi/static/css
