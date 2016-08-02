@@ -27,6 +27,15 @@
     <!--[if lt IE 9]>
     <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+<script src="{% static "remarkable-bootstrap-notify/dist/bootstrap-notify.min.js" %}"></script>
+
+    <!-- Begin Cookie Consent plugin by Silktide - http://silktide.com/cookieconsent -->
+<script type="text/javascript">
+    window.cookieconsent_options = {"message":"This website uses cookies to ensure you get the best experience on our website","dismiss":"Got it!","learnMore":"More info","link":null,"theme":"dark-bottom"};
+</script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
+<!-- End Cookie Consent plugin -->
 
 </head>
 
@@ -46,9 +55,9 @@
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
               <!-- views passes the value page which indicates the page type, indeed if page is euqal to index or about then the the li is activated -->
-            <li {% if page == "index" %} class="active" {% endif %}><a href="#">Home</a></li>
-            <li {% if page == "about" %} class="active" {% endif %}><a href="#about">About</a></li>
-            <li {% if page == "contact" %} class="active" {% endif %}><a href="#contact">Contact</a></li>
+            <li {% if page == "index" %} class="active" {% endif %}><a href="{% url 'index'%}">Home</a></li>
+            <li {% if page == "about" %} class="active" {% endif %}><a href="">About</a></li>
+            <li {% if page == "contact" %} class="active" {% endif %}><a href="{% url 'contact'%}">Contact</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -63,8 +72,14 @@
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/register">Register</a></li>
-            <li ><a href="/login">Login <span class="sr-only">(current)</span></a></li>
+              {% if user.is_authenticated %}
+               <li><a href="#">{{ user.username }}</a></li>
+               <li ><a href="{% url "django.contrib.auth.views.logout" %}?next=/">Logout <span class="sr-only">(current)</span></a></li>
+{% else %}
+     <li><a href="/register">Register</a></li>
+            <li ><a href="{%url 'login'%}">Login <span class="sr-only">(current)</span></a></li>
+{% endif %}
+
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -80,7 +95,7 @@
 
 
 </div> <!-- container -->
-    <script src="{% static "remarkable-bootstrap-notify/dist/bootstrap-notify.min.js" %}"></script>
+
  <script>
 
 

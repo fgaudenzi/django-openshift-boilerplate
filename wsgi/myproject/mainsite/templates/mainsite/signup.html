@@ -15,7 +15,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="name" id="name"  placeholder="Name Lastname"/>
+									<input type="text" class="form-control" name="name" id="name_lastname"  placeholder="Name Lastname" required/>
 								</div>
 							</div>
 						</div>
@@ -25,7 +25,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="email" id="email"  placeholder="user@email.com"/>
+									<input type="email" class="form-control" name="email" id="email"  placeholder="user@email.com" required/>
 								</div>
 							</div>
 						</div>
@@ -35,7 +35,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" class="form-control" name="username" id="username"  placeholder="username"/>
+									<input type="text" class="form-control" name="username" id="username"  placeholder="username" required/>
 								</div>
 							</div>
 						</div>
@@ -45,7 +45,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password"/>
+									<input type="password" class="form-control" name="password" id="password"  placeholder="Enter your Password" required/>
 								</div>
 							</div>
 						</div>
@@ -55,7 +55,7 @@
 							<div class="cols-sm-10">
 								<div class="input-group">
 									<span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"/>
+									<input type="password" class="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"required/>
 								</div>
 							</div>
 						</div>
@@ -67,4 +67,31 @@
 					</form>
 				</div>
 			</div>
+
+<script>
+	var password = document.getElementById("password")
+  , confirm_password = document.getElementById("confirm");
+    var nameT=document.getElementById("name_lastname");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+function validateName(){
+    names=nameT.value;
+    l=names.split(" ");
+    if(l.length!=2){
+        nameT.setCustomValidity('Yuo must insert both Name and Lastname');
+    }else{
+         nameT.setCustomValidity('');
+    }
+}
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+nameT.onchange= validateName;
+
+</script>
 {% endblock content %}

@@ -1,5 +1,7 @@
 {% extends 'mainsite/base.html' %}
 {% block content %}
+
+
 <div class="row main">
 				<div class="panel-heading">
 	               <div class="panel-title text-center">
@@ -8,7 +10,7 @@
 	               	</div>
 	            </div>
 				<div class="main-login main-center">
-					<form class="form-horizontal" method="post" action="{% url 'do_login'%}">{% csrf_token %}
+					<form class="form-horizontal" method="post" action="{% url 'login'%}">{% csrf_token %}
 						<div class="form-group">
 							<label for="username" class="cols-sm-2 control-label">Username</label>
 							<div class="cols-sm-10">
@@ -67,4 +69,26 @@
    </ul>
  </p>
  </div>
+
+
+{% if form.errors %}
+<script>
+$.notify({
+	// options
+	message: 'Wrong Username/Password'
+},{
+	// settings
+	type: 'danger'
+});
+</script>
+
+{% endif %}
+
+<script type="text/javascript">
+   window.onload = function(e) {
+       if (window.location.hash == '#_=_') {
+           window.location = '/';
+       }
+   }
+</script>
 {% endblock content %}

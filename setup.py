@@ -17,7 +17,7 @@ setup(
     url='http://www.python.org/sigs/distutils-sig/',
     # GETTING-STARTED: define required django version:
     install_requires=[
-        'Django==1.8.4','django-bootstrap3==7.0.1','djangorestframework','djangorestframework-jwt'
+        'Django==1.8.4','django-bootstrap3==7.0.1','djangorestframework','djangorestframework-jwt', 'python-social-auth'
     ],
     dependency_links=[
         'https://pypi.python.org/simple/django/'

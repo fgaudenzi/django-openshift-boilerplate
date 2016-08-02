@@ -1,0 +1,65 @@
+{% extends 'mainsite/base.html' %}
+{% block content %}
+<div class="row">
+		<div class="col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+
+            <div class="col-sm-12">
+                <div class="col-xs-12 col-sm-8">
+                    <h2>Filippo Gaudenzi</h2>
+                    <p><strong>About: </strong> Cloud Researcher, Web Developer </p>
+                    <p><strong>Hobbies: </strong> Play folk music, freesbiedog, hang out, good wine and good food. </p>
+                    <p><strong>Skills: </strong>
+                        <span class="tags">html5</span>
+                        <span class="tags">css3</span>
+                        <span class="tags">python</span>
+                        <span class="tags">bootstrap3</span>
+                        <span class="tags">cloud - aws - openstack</span>
+                        <span class="tags">django</span>
+                        <span class="tags">angularjs v1</span>
+                        <span class="tags">jquery</span>
+                        <span class="tags">nodejs - express - loopbackjs</span>
+                    </p>
+                </div>
+                <div class="col-xs-12 col-sm-4 text-center">
+                    <figure>
+                        <img src="https://avatars3.githubusercontent.com/u/2579321?v=3&s=460" alt="" class="img-circle img-responsive">
+
+                    </figure>
+                </div>
+            </div>
+            <div class="col-xs-12 divider text-center">
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2 id="rep"><strong>  </strong></h2>
+                    <p><small>Repositories</small></p>
+                    <a href="https://github.com/fgaudenzi">  <button class="btn btn-info btn-block"><span class="fa fa-user"></span> View Profile </button></a>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2 id="fork"><strong></strong></h2>
+                    <p><small>Fork</small></p>
+                     <a href="https://github.com/login?return_to=%2Ffgaudenzi"> <button class="btn btn-success btn-block"><span class="fa fa-plus-circle"></span> Follow </button></a>
+                </div>
+                <div class="col-xs-12 col-sm-4 emphasis">
+                    <h2 id="star"><strong></strong></h2>
+                    <p><small>Star</small></p>
+                    <a href="https://github.com/login?return_to=%2Ffgaudenzi%2Fdjango-openshift-boilerplate">  <button class="btn btn-warning btn-block"><span class="fa fa-star"></span> Like It </button>
+                </div>
+            </div>
+
+
+		</div>
+	</div>
+<script>
+
+    $.get( "https://api.github.com/users/fgaudenzi/repos", function( data ) {
+        var returnedData = $.grep(data, function (element, index) {
+        return element.name.indexOf("openshift") !== -1
+        });
+       $( "#rep" ).html( data.length );
+        $( "#fork" ).html( returnedData[0].forks_count );
+        $( "#star" ).html( returnedData[0].stargazers_count);
+        console.log(returnedData);
+});
+
+
+</script>
+{% endblock content %}
