@@ -41,6 +41,9 @@
 
 <body>
 
+{% url 'login' as loginurl %}
+{% url 'register' as registerurl %}
+
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -74,10 +77,10 @@
           <ul class="nav navbar-nav navbar-right">
               {% if user.is_authenticated %}
                <li><a href="#">{{ user.username }}</a></li>
-               <li ><a href="{% url "django.contrib.auth.views.logout" %}?next=/">Logout <span class="sr-only">(current)</span></a></li>
+               <li><a href="{% url "django.contrib.auth.views.logout" %}?next=/">Logout <span class="sr-only">(current)</span></a></li>
 {% else %}
-     <li><a href="/register">Register</a></li>
-            <li ><a href="{%url 'login'%}">Login <span class="sr-only">(current)</span></a></li>
+     <li {% if request.get_full_path == registerurl %} class="active" {% endif %}><a href="/register">Register</a></li>
+            <li {% if request.get_full_path == loginurl %} class="active" {% endif %} ><a href="{%url 'login'%}">Login <span class="sr-only">(current)</span></a></li>
 {% endif %}
 
           </ul>
