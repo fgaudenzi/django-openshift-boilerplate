@@ -10,8 +10,23 @@
 	               	</div>
 	            </div>
 				<div class="main-login main-center">
+                    <p style="text-align: center"> Login using your socail accounts</p>
+                    <div class="row">
+                        <div class="col-md-6 col-sx-6">
+<a class="btn btn-primary btn-block social-facebook" href="/auth/facebook"><i class="fa fa-facebook"></i></a></div>
+ <div class="col-md-6 col-sx-6">
+<a class="btn btn-primary btn-block social-twitter" href="/auth/twitter"><i class="fa fa-twitter"></i></a>
+</div></div>
+                        <div class="row" style="margin-top: 5px;">
+ <div class="col-md-6  col-sx-6">
+<a class="btn btn-primary btn-block social-linkedin" href="/auth/linkedin"><i class="fa fa-linkedin"></i></a></div>
+ <div class="col-md-6 col-sx-6">
+                        <a class="btn btn-primary btn-block social-google" href="/auth/google"><i class="fa fa-google-plus"></i></a></div>
+</div>
+ <p style="text-align: center;margin:0;margin-top:10px">or your own occount</p>
 					<form class="form-horizontal" method="post" action="{% url 'login'%}">{% csrf_token %}
-						<div class="form-group">
+
+                        <div class="form-group"
 							<label for="username" class="cols-sm-2 control-label">Username</label>
 							<div class="cols-sm-10">
 								<div class="input-group">
